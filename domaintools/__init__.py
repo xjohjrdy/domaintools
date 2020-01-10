@@ -69,7 +69,7 @@ class Domain(object):
         if not TLDS:
             raise Exception('TLDs could not be loaded from data.py. To create '
                 'the file, run build_data_file.py') 
-        if u':' in domain_string:
+        if ':' in domain_string:
             # strip out port numbers
             domain_string, port = domain_string.rsplit(u':', 1)
         self.allow_private = allow_private
@@ -78,7 +78,7 @@ class Domain(object):
             self.__full_domain = domain_string.lower().encode('idna')
         except:
             self.__full_domain = domain_string.lower()
-        self.__domain_parts = self.__full_domain.split('.')
+        self.__domain_parts = str(self.__full_domain, 'utf8').split('.')
         if self.__domain_parts[-1] == u'':
             self.__domain_parts.pop()
 
